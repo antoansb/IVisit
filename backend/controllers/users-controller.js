@@ -1,17 +1,8 @@
-const uuid = require('uuid/v4');
 const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
-const DUMMY_USERS = [
-    {
-        id: 'u1',
-        name: 'Lazar',
-        email: 'laza@gmail.com',
-        password: 'lazar'
-    }
-];
 
 const getUsers = async (req, res, next) => {
     let users;
@@ -33,7 +24,7 @@ const register = async (req, res, next) => {
         return next(new HttpError('Invalid input.' ,422)); 
     }
 
-    const {name, email, password, places } = req.body;
+    const {name, email, password } = req.body;
 
     let existingUser;
     try {
@@ -54,7 +45,7 @@ const register = async (req, res, next) => {
         email,
         image: 'https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/6/63/97d1d9f934a350cee765c5ac1a466605.jpg/revision/latest/top-crop/width/360/height/360?cb=20190527184444',
         password,
-        places
+        places: []
     });
 
     try {
